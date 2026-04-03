@@ -1768,5 +1768,35 @@ uniqueStudents.forEach(name => {
   listContainer.appendChild(p);
 });
 </script>
+  <script>
+// Function to normalize names to Proper Case
+function normalizeName(name) {
+  return name
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+// Function to remove duplicates from an array
+function removeDuplicates(array) {
+  const normalized = array.map(normalizeName);
+  return [...new Set(normalized)];
+}
+
+// Select all student name elements (adjust selector if needed)
+const studentElements = document.querySelectorAll(".student-name");
+
+// Gather all names
+const studentNames = Array.from(studentElements).map(el => el.textContent);
+
+// Remove duplicates & normalize
+const uniqueStudents = removeDuplicates(studentNames);
+
+// Update dashboard display
+studentElements.forEach((el, i) => {
+  if(uniqueStudents[i]) el.textContent = uniqueStudents[i];
+});
+</script>
 </body>
 </html>
