@@ -1743,5 +1743,30 @@ function init(){
 init();
 })();
 </script>
+  <script>
+// Step 1: Grab all student names in the container
+const listContainer = document.getElementById("student-list");
+const originalNames = Array.from(listContainer.querySelectorAll("p")).map(p => p.textContent);
+
+// Step 2: Normalize names to Proper Case
+function normalizeName(name) {
+  return name
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+// Step 3: Remove duplicates
+const uniqueStudents = [...new Set(originalNames.map(normalizeName))];
+
+// Step 4: Replace old list with clean list
+listContainer.innerHTML = "";
+uniqueStudents.forEach(name => {
+  const p = document.createElement("p");
+  p.textContent = name;
+  listContainer.appendChild(p);
+});
+</script>
 </body>
 </html>
